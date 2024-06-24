@@ -1,10 +1,14 @@
 import parcs.AM;
 import parcs.AMInfo;
 
+import java.util.Random;
+
 public class ShellSort implements AM {
     public void run(AMInfo info) {
         System.out.println("ShellSort: Reading from channel...");
-        int[] array = (int[]) info.parent.readObject();
+//        int[] array = (int[]) info.parent.readObject();
+
+        int[] array = generateRandomArray(100000);
 
         System.out.println("ShellSort: Unsorted subarray (first 20 elements): ");
         printArray(array, 20);
@@ -35,6 +39,15 @@ public class ShellSort implements AM {
                 array[j] = temp;
             }
         }
+    }
+
+    private static int[] generateRandomArray(int size) {
+        Random rand = new Random();
+        int[] array = new int[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = rand.nextInt(10000) - 5000;
+        }
+        return array;
     }
 
     private void printArray(int[] array, int limit) {
